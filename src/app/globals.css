@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --theme-gradient: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 30%, #ede9fe 70%, #fee2e2 100%);
+  --theme-accent: #db2777;
+  --theme-accent-light: #fce7f3;
+  --theme-card-bg: rgba(255, 255, 255, 0.96);
+  --theme-text: #701a75;
+  --theme-text-muted: #9d174d;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* ── Vibrant shimmer / rainbow text utility ── */
+.rainbow-text {
+  background: linear-gradient(135deg, #f43f5e, #f97316, #eab308, #22c55e, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Floating Hearts Animation ── */
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) scale(0.8) rotate(-10deg);
+    opacity: 0;
+  }
+  15% { opacity: 0.65; }
+  85% { opacity: 0.65; }
+  100% {
+    transform: translateY(-108vh) scale(1.25) rotate(18deg);
+    opacity: 0;
+  }
+}
+.animate-float-heart {
+  animation-name: floatHeart;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* ── Vibrant shimmer pulse on cards ── */
+@keyframes shimmerPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.65; }
+}
+.shimmer-pulse { animation: shimmerPulse 3s ease-in-out infinite; }
+
+/* ── Colour-cycling border glow ── */
+@keyframes rainbowBorder {
+  0%   { box-shadow: 0 0 18px 3px #f43f5e88; }
+  25%  { box-shadow: 0 0 18px 3px #f9731688; }
+  50%  { box-shadow: 0 0 18px 3px #a855f788; }
+  75%  { box-shadow: 0 0 18px 3px #3b82f688; }
+  100% { box-shadow: 0 0 18px 3px #f43f5e88; }
+}
+.rainbow-glow { animation: rainbowBorder 4s linear infinite; }
+
+/* ── Accessibility: prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float-heart { animation: none !important; display: none !important; }
+}
+
+/* ── Mobile touch improvements ── */
+button, a, input { touch-action: manipulation; }
+
+/* ── Handwriting font convenience class ── */
+.font-handwriting { font-family: 'Caveat', cursive; }
+
+/* ── Wizard field input ── */
+.field-input {
+  @apply w-full bg-white/90 border-2 border-gray-200 rounded-2xl px-4 py-3 text-base outline-none
+         focus:border-[var(--theme-accent)] transition-colors duration-150 shadow-sm;
+  user-select: text;
+}
